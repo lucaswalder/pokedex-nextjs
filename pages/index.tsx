@@ -173,7 +173,8 @@ const Home: React.FC = ({pokemonInfo, pokeList, listAllTypes}: any) => {
           { !showType && 
             <>
               <div className="top-area">
-                <span>{pokeList.count}</span>
+                <Image src={pokeballIconRed} title='Numbers of pokemons' alt='Numbers of Pokemon' />
+                <span>{pokeList.count} Pokemons</span>
               </div>
               <div className="grid-list">
                 {
@@ -197,7 +198,7 @@ const Home: React.FC = ({pokemonInfo, pokeList, listAllTypes}: any) => {
             <div className="grid-list">
                 {
                 dados.map(({types, name, id, sprites}: any, index:number) => 
-                <Card key={name+index}
+                <Card key={name + index}
                   name={name}
                   type={types[0].type.name}
                   id={id}

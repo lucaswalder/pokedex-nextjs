@@ -20,7 +20,7 @@ import rock from '@/assets/icon-types/rock.svg'
 import steel from '@/assets/icon-types/steel.svg'
 import water from '@/assets/icon-types/water.svg'
 
-export const Card: React.FC = ({type, id, image, name}: any) => {
+export const Card: React.FC <{type: any, id:any, image:any, name:any}> = ({type, id, image, name}) => {
     return(
         <CardContent className={type}>
             <div className="image">
