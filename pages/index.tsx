@@ -138,11 +138,6 @@ const Home: React.FC = ({pokemonInfo, pokeList, listAllTypes}: any) => {
   useEffect(() => {
     handleApi
   },[dados])
-
-  useEffect(() => {
-    console.log(listAllTypes.results)
-  }, [])
-
   
   return (
     <>

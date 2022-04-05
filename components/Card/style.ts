@@ -1,4 +1,16 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
+
+const FadeUp = keyframes`
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+`;
 
 export const CardContent = styled.div`
     background: var(--white);
@@ -12,6 +24,7 @@ export const CardContent = styled.div`
     flex-direction: column;
     align-items: center;
     transition: box-shadow .3s ease;
+    animation: ${FadeUp} 1s ease forwards;
     cursor: pointer;
     &::before {
         position: absolute;
