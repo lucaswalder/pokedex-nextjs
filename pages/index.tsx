@@ -4,7 +4,7 @@ import { api } from "../services/api"
 import { Slide } from "@/components/Slide";
 import { Search } from "@/components/Search";
 import { Card } from "@/components/Card";
-import { MainContent } from "./style";
+import { MainContent } from "./styles";
 
 import Image from "next/image";
 
