@@ -119,6 +119,7 @@ const Home: React.FC = ({pokemonInfo, pokeList, listAllTypes}: any) => {
 
   const [dados, setDados] = useState([])
   const [showType, setShowType] = useState(false)
+  const [modal, setModal] = useState(false)
 
   const handleApi = async (name:any) => {
     const response = await api.get(name)
@@ -146,7 +147,7 @@ const Home: React.FC = ({pokemonInfo, pokeList, listAllTypes}: any) => {
     <MainContent>
       <div className="container">
         <aside>
-        <button className='all' onClick={() => setShowType(false)}>
+        <button className={showType ? 'all' : 'all active'} onClick={() => setShowType(false)}>
             <div className="icon">
             <Image src={pokeballIconBlue} title='See all pokemons' alt='icon all' />
             </div>
@@ -156,7 +157,7 @@ const Home: React.FC = ({pokemonInfo, pokeList, listAllTypes}: any) => {
             if(type.name !== 'unknown' && type.name !== 'shadow')
             return type
           }).map((type:any, index:number) => 
-          <button className={type.name} key={type + index} onClick={() => handleApi(`type/${index + 1}`)}>
+          <button aria-controls="pokelist" id="button" className={type.name} key={type + index} onClick={() => handleApi(`type/${index + 1}`)}>
             <div className="icon">
             <Image src={iconTypes[index].icon} title={type.name} alt={type.name} />
             </div>
@@ -171,14 +172,19 @@ const Home: React.FC = ({pokemonInfo, pokeList, listAllTypes}: any) => {
                 <Image src={pokeballIconRed} title='Numbers of pokemons' alt='Numbers of Pokemon' />
                 <span>{pokeList.count} Pokemons</span>
               </div>
-              <div className="grid-list">
+              <div className="grid-list" id="pokelist" aria-labelledby="button">
                 {
-                pokemonInfo.map(({types, name, id, sprites}: any, index:number) => 
+                pokemonInfo.map(({types, name, id, sprites, stats, height, weight, abilities}: any, index:number) => 
                   <Card key={name+index}
                     name={name}
                     type={types[0].type.name}
                     id={id}
                     image={sprites.other.dream_world.front_default || sprites.front_default }
+                    stats={stats}
+                    height={height}
+                    weight={weight}
+                    abilities={abilities}
+                    allTypes={types}
                   />
                   )}
               </div>
@@ -192,12 +198,17 @@ const Home: React.FC = ({pokemonInfo, pokeList, listAllTypes}: any) => {
             </div>
             <div className="grid-list">
                 {
-                dados.map(({types, name, id, sprites}: any, index:number) => 
+                dados.map(({types, name, id, sprites, stats, height, weight, abilities}: any, index:number) => 
                 <Card key={name + index}
                   name={name}
                   type={types[0].type.name}
                   id={id}
                   image={sprites.other.dream_world.front_default || sprites.front_default}
+                  stats={stats}
+                  height={height}
+                  weight={weight}
+                  abilities={abilities}
+                  allTypes={types}
                 />
                 )}
             </div>

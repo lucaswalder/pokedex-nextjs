@@ -6,6 +6,7 @@ export const MainContent = styled.section`
         justify-content: space-between;
         .right-area {
             padding-top: 7rem;
+            padding-bottom: 7rem;
             padding-left: 7.5rem;
             border-left: 1px solid #EFF3F6;
             width: 100%;
@@ -46,6 +47,9 @@ export const MainContent = styled.section`
                     margin-bottom: 4rem;
                 }
                 &:hover {
+                    filter: none;
+                }
+                &.active {
                     filter: none;
                 }
                 .icon {

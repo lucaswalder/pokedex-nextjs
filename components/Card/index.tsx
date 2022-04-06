@@ -19,10 +19,28 @@ import psychic from '@/assets/icon-types/psychic.svg'
 import rock from '@/assets/icon-types/rock.svg'
 import steel from '@/assets/icon-types/steel.svg'
 import water from '@/assets/icon-types/water.svg'
+import { Modal } from "../Modal"
+import { useEffect, useState } from "react"
+import { api } from "services/api"
 
-export const Card: React.FC <{type: any, id:any, image:any, name:any}> = ({type, id, image, name}) => {
+export const Card: React.FC <{type: any, allTypes:any, id:any, image:any, name:string, stats:any, height:number, weight:number, abilities:any}> = ({type, id, image, name, stats, height, weight, abilities, allTypes}) => {
+
+    const [modal, setModal] = useState(false)
+    const [weakness, setWeakness] = useState([])
+
+    const handleModalStatus = async (type:any) => {
+        const response = await api.get(type)
+        setModal(true)
+        setWeakness(response.data)
+    }
+
+    useEffect(() => {
+        handleModalStatus
+    }, [weakness])
+
     return(
-        <CardContent className={type}>
+        <>
+        <CardContent className={type} onClick={() => {handleModalStatus(`type/${type}`)}}>
             <div className="image">
                 <img src={image} alt={name} title={name} />
                 <div className="bg"></div>
@@ -76,6 +94,22 @@ export const Card: React.FC <{type: any, id:any, image:any, name:any}> = ({type,
                         title={`${name} from ${type}`} alt={type} />
                 </div>
             </div>
-        </CardContent>
+            </CardContent>
+            {modal &&
+                <Modal
+                type={allTypes}
+                id={id}
+                image={image}
+                name={name}
+                stats={stats}
+                height={height}
+                weight={weight}
+                abilities={abilities}
+                closeModal={() => {setModal(false)}}
+                weakness={weakness}
+                modal={modal}
+                />
+            }
+        </>
     )
 }
