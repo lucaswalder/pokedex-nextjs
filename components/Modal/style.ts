@@ -1,4 +1,4 @@
-import styled, { css } from "styled-components";
+import styled, { keyframes } from "styled-components";
 
 import bug from "../../assets/bg-types/bug.svg";
 import dark from "@/assets/bg-types/dark.svg";
@@ -19,6 +19,26 @@ import rock from "@/assets/bg-types/rock.svg";
 import steel from "@/assets/bg-types/steel.svg";
 import water from "@/assets/bg-types/water.svg";
 
+const modalOpacity = keyframes`
+    from {
+        opacity: 0;
+        pointer-events: none;
+    }
+    to {
+        opacity: 1;
+        pointer-events: all;
+    }
+`;
+
+const slideUp = keyframes`
+    from {
+        transform: translateY(5rem);
+    }
+    to {
+        transform: translateY(0);
+    }
+`;
+
 export const ModalContent = styled.div`
     width: 100%;
     height: 100%;
@@ -29,13 +49,8 @@ export const ModalContent = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-    opacity: 0;
-    pointer-events: none;
-    transition: all .3s;
-    &.active {
-        opacity: 1;
-        pointer-events: all;
-    }
+    animation: ${modalOpacity} .3s ease forwards;
+
     .overlay {
         position: fixed;
         top: 0;
@@ -57,8 +72,7 @@ export const ModalBox = styled.div`
     height: 50.8rem;
     box-shadow: 0px 10px 40px rgba(13, 12, 71, 0.05);
     border-radius: 16px;
-    transform: translateY(5rem);
-    transition: all .6s ease;
+    animation: ${slideUp} .3s ease forwards;
     &.bug {
         background: var(--white) url(${bug.src}) no-repeat left top;
     }
@@ -160,8 +174,10 @@ export const ModalBox = styled.div`
         }
         .image {
             width: 20.2rem;
+            height: 18rem;
             >img {
                 width: 100%;
+                height: 100%;
             }
         }
     }
