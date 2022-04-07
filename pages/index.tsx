@@ -120,6 +120,7 @@ const Home: React.FC = ({ pokemonInfo, pokeList, listAllTypes }: any) => {
   const [text, setText] = useState("");
   const [showMore, setShowMore] = useState<any>()
   const [pokeCounter, setPokeCounter] = useState(9)
+  const [message, setMessage] = useState<any>('')
   const [search, setSearch] = useState<{
     type: any;
     allTypes: any;
@@ -137,7 +138,7 @@ const Home: React.FC = ({ pokemonInfo, pokeList, listAllTypes }: any) => {
     allTypes: null,
     id: 0,
     image: null,
-    name: 'a',
+    name: '',
     stats: null,
     height: 0,
     weight: 0,
@@ -161,13 +162,17 @@ const Home: React.FC = ({ pokemonInfo, pokeList, listAllTypes }: any) => {
     setShowResults(false);
   };
 
-  const handleSearch = async () => {
-    const responseSearch = await api.get(`pokemon/${text}`);
-    if (responseSearch.status != 200) {
-      return [];
-    }
-    setSearch(responseSearch.data);
-    setShowResults(true);
+  const handleSearch =  () => {
+    api.get(`pokemon/${text}`)
+    .then( response => {
+      setSearch(response.data);
+      setShowResults(true);
+    }) .catch((error) => {
+      if(error.response) {
+        setText('')
+        setMessage(`No Pokemon with name or id: ${text} has found, please try again!`)
+      }
+    })
   };
 
   const handleShowMore = async () => {
@@ -195,7 +200,6 @@ const Home: React.FC = ({ pokemonInfo, pokeList, listAllTypes }: any) => {
   }, [showMore]);
 
   useEffect(() => {
-    console.log(search);
   }, [search]);
 
   return (
@@ -211,7 +215,7 @@ const Home: React.FC = ({ pokemonInfo, pokeList, listAllTypes }: any) => {
           <aside>
             <button
               className={showType ? "all" : "all active"}
-              onClick={() => { setShowType(false), setShowResults(false) }}
+              onClick={() => { setShowType(false), setShowResults(false), setMessage(false) }}
             >
               <div className="icon">
                 <Image
@@ -247,6 +251,19 @@ const Home: React.FC = ({ pokemonInfo, pokeList, listAllTypes }: any) => {
               ))}
           </aside>
           <div className="right-area">
+            {message && 
+              <>
+              <div className="top-area">
+                  <Image
+                    src={pokeballIconRed}
+                    title="Numbers of pokemons"
+                    alt="Numbers of Pokemon"
+                  />
+                  <span>0 Pokemon</span>
+                </div>
+                <h2>{message}</h2>
+              </>
+            }
             {showResults && (
               <>
                 <div className="top-area">
@@ -276,7 +293,7 @@ const Home: React.FC = ({ pokemonInfo, pokeList, listAllTypes }: any) => {
                 </div>
               </>
             )}
-            {!showType && !showResults && (
+            {!showType && !showResults && !message && (
               <>
                 <div className="top-area">
                   <Image
@@ -322,7 +339,7 @@ const Home: React.FC = ({ pokemonInfo, pokeList, listAllTypes }: any) => {
                       />
                     )
                   )}
-                  {showMore &&
+                  {showMore && !message &&
                     showMore.map(
                       (
                         {
@@ -353,7 +370,8 @@ const Home: React.FC = ({ pokemonInfo, pokeList, listAllTypes }: any) => {
                           allTypes={types}
                         />
                       )
-                    )}
+                    )
+                  }
 
                 </div>
                 <button className="load-more" onClick={handleShowMore}>
@@ -361,7 +379,7 @@ const Home: React.FC = ({ pokemonInfo, pokeList, listAllTypes }: any) => {
                 </button>
               </>
             )}
-            {showType && !showResults && (
+            {showType && !showResults && !message && (
               <>
                 <div className="top-area">
                   <Image
