@@ -78,19 +78,24 @@ export const MainContent = styled.section`
             max-width: 23.9rem;
             display: flex;
             flex-direction: column;
+            padding-bottom: 7rem;
             button {
                 display: flex;
                 align-items: center;
                 filter: grayscale(100%);
-                transition: filter .3s ease;
-                &:not(:last-child) {
-                    margin-bottom: 4rem;
+                opacity: .6;
+                transition: all .3s ease;
+                padding: 1.5rem 0 ;
+                &:first-child {
+                    padding-top: 0;
                 }
                 &:hover {
                     filter: none;
+                    opacity: 1;
                 }
                 &.active {
                     filter: none;
+                    opacity: 1;
                 }
                 .icon {
                     margin-right: 2.9rem;

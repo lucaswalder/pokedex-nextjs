@@ -118,8 +118,8 @@ const Home: React.FC = ({ pokemonInfo, pokeList, listAllTypes }: any) => {
   const [showType, setShowType] = useState(false);
   const [modal, setModal] = useState(false);
   const [text, setText] = useState("");
-  const [showMore, setShowMore] = useState<any>()
-  const [pokeCounter, setPokeCounter] = useState(9)
+  const [showMore, setShowMore] = useState<any>([])
+  const [pokeCounter, setPokeCounter] = useState(0)
   const [message, setMessage] = useState<any>('')
   const [search, setSearch] = useState<{
     type: any;
@@ -162,41 +162,38 @@ const Home: React.FC = ({ pokemonInfo, pokeList, listAllTypes }: any) => {
     setShowResults(false);
   };
 
-  const handleSearch =  () => {
-    api.get(`pokemon/${text}`)
-    .then( response => {
-      setSearch(response.data);
-      setShowResults(true);
-    }) .catch((error) => {
-      if(error.response) {
-        setText('')
-        setMessage(text)
-      }
-    })
+  const handleSearch = () => {
+    api.get(`pokemon/${text.toLocaleLowerCase()}`)
+      .then(response => {
+        setSearch(response.data);
+        setShowResults(true);
+      }).catch((error) => {
+        if (error.response) {
+          setText('')
+          setMessage(text)
+          setShowResults(false)
+        }
+      })
   };
 
   const handleShowMore = async () => {
-    const response = await api.get(`pokemon?offset=${pokeCounter}&limit=9`);
+    const response = await api.get(`pokemon?offset=9&limit=${pokeCounter}`);
     const morePokemon = await Promise.all(
       response.data.results.map(({ url }: any) => api.get(url))
     );
-  
+
     let listMorePokemon: any = [];
     for (let i = 0; i < response.data.results.length; i++) {
       listMorePokemon.push(morePokemon[i].data);
     }
-
-    setPokeCounter(pokeCounter + 9)
     setShowMore(listMorePokemon)
- 
   }
-
+  
   useEffect(() => {
-    handleApi;
   }, [dados]);
 
   useEffect(() => {
-    handleShowMore;
+    setPokeCounter(pokeCounter + 9)
   }, [showMore]);
 
   useEffect(() => {
@@ -215,7 +212,7 @@ const Home: React.FC = ({ pokemonInfo, pokeList, listAllTypes }: any) => {
           <aside>
             <button
               className={showType ? "all" : "all active"}
-              onClick={() => { setShowType(false), setShowResults(false), setMessage(false) }}
+              onClick={() => { setShowType(false), setShowResults(false), setMessage(false), setShowMore(''), setPokeCounter(0) }}
             >
               <div className="icon">
                 <Image
@@ -251,9 +248,9 @@ const Home: React.FC = ({ pokemonInfo, pokeList, listAllTypes }: any) => {
               ))}
           </aside>
           <div className="right-area">
-            {message && 
+            {message && !showResults &&
               <>
-              <div className="top-area">
+                <div className="top-area">
                   <Image
                     src={pokeballIconRed}
                     title="Numbers of pokemons"
@@ -262,8 +259,8 @@ const Home: React.FC = ({ pokemonInfo, pokeList, listAllTypes }: any) => {
                   <span>0 Pokemon</span>
                 </div>
                 <div className="error-message">
-                <h4>No Pokemon with name or id: <span>{message}</span> has found.</h4>
-                <p>Please try again!</p>
+                  <h4>No Pokemon with name or id: <span>{message}</span> has found.</h4>
+                  <p>Please try again!</p>
                 </div>
               </>
             }
@@ -393,7 +390,11 @@ const Home: React.FC = ({ pokemonInfo, pokeList, listAllTypes }: any) => {
                   <span>{dados.length} Pokemons</span>
                 </div>
                 <div className="grid-list">
-                  {dados.map(
+                  {dados.filter((filteredPokemon: any) => {
+                    if (filteredPokemon.sprites.front_default !== null) {
+                      return filteredPokemon
+                    }
+                  }).map(
                     (
                       {
                         types,
@@ -423,14 +424,15 @@ const Home: React.FC = ({ pokemonInfo, pokeList, listAllTypes }: any) => {
                         allTypes={types}
                       />
                     )
-                  )}
+                  )
+                  }
                 </div>
               </>
             )}
           </div>
         </div>
       </MainContent>
-      <Footer/>
+      <Footer />
     </>
   );
 };
