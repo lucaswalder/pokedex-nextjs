@@ -170,7 +170,7 @@ const Home: React.FC = ({ pokemonInfo, pokeList, listAllTypes }: any) => {
     }) .catch((error) => {
       if(error.response) {
         setText('')
-        setMessage(`No Pokemon with name or id: ${text} has found, please try again!`)
+        setMessage(text)
       }
     })
   };
@@ -261,7 +261,10 @@ const Home: React.FC = ({ pokemonInfo, pokeList, listAllTypes }: any) => {
                   />
                   <span>0 Pokemon</span>
                 </div>
-                <h2>{message}</h2>
+                <div className="error-message">
+                <h4>No Pokemon with name or id: <span>{message}</span> has found.</h4>
+                <p>Please try again!</p>
+                </div>
               </>
             }
             {showResults && (

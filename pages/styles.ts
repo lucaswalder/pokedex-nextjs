@@ -53,6 +53,26 @@ export const MainContent = styled.section`
             }
         }
 
+        .error-message {
+            h4 {
+                font-family: 'Montserrat',sans-serif;
+                font-weight: 600;
+                font-size: 1.8rem;
+                line-height: 150%;
+                color: #4D5053;
+                span {
+                    color: var(--red-primary);
+                }
+            }
+            p {
+                font-family: 'Montserrat',sans-serif;
+                font-weight: 600;
+                font-size: 1.8rem;
+                line-height: 150%;
+                color: #4D5053;
+            }
+        }
+
         aside {
             width: 100%;
             max-width: 23.9rem;
