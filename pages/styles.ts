@@ -33,6 +33,26 @@ export const MainContent = styled.section`
             gap: 3.2rem;
         }
 
+        .load-more {
+            font-family: 'Montserrat',sans-serif;
+            font-weight: 600;
+            font-size: 1.4rem;
+            line-height: 1.7rem;
+            letter-spacing: -0.01em;
+            color: var(--blue-primary);
+            padding: 1.4rem 2rem;
+            background: rgba(63, 93, 179, 0.1);
+            border-radius: 6px;
+            width: 100%;
+            max-width: fit-content;
+            margin: 6.8rem auto 0;
+            display: block;
+            transition: all .3s;
+            &:hover {
+                background: rgba(63, 93, 179, 0.2);
+            }
+        }
+
         aside {
             width: 100%;
             max-width: 23.9rem;
