@@ -13,9 +13,9 @@ export const Search:React.FC <{value:any, onChange:any, searchTerm:any} > = ({va
                 <h2>Select your Pokémon</h2>
                 <div className="input-box">
                     <input type="text" value={value} onChange={handleClick} placeholder="Search name or code"/>
-                    <div className="icon" onClick={searchTerm}>
+                    <button className="icon" onClick={searchTerm} disabled={value === '' ? true : false}>
                         <Image src={searchIcon} alt='search icon' title="Search name or code" />
-                    </div>
+                    </button>
                 </div>
             </div>
         </SearchContent>

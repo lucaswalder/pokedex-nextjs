@@ -117,6 +117,7 @@ const Home: React.FC = ({ pokemonInfo, pokeList, listAllTypes }: any) => {
   const [dados, setDados] = useState([]);
   const [showType, setShowType] = useState(false);
   const [modal, setModal] = useState(false);
+  const [showAll, setShowAll] = useState(true)
   const [text, setText] = useState("");
   const [showMore, setShowMore] = useState<any>([])
   const [pokeCounter, setPokeCounter] = useState(0)
@@ -160,6 +161,9 @@ const Home: React.FC = ({ pokemonInfo, pokeList, listAllTypes }: any) => {
     setDados(listTypes);
     setShowType(true);
     setShowResults(false);
+    setShowAll(false);
+    setMessage(false);
+    setText('')
   };
 
   const handleSearch = () => {
@@ -167,11 +171,16 @@ const Home: React.FC = ({ pokemonInfo, pokeList, listAllTypes }: any) => {
       .then(response => {
         setSearch(response.data);
         setShowResults(true);
+        setShowAll(false)
+        setShowType(false)
+        setMessage(false)
       }).catch((error) => {
         if (error.response) {
           setText('')
           setMessage(text)
           setShowResults(false)
+          setShowAll(false)
+          setShowType(false)
         }
       })
   };
@@ -212,7 +221,7 @@ const Home: React.FC = ({ pokemonInfo, pokeList, listAllTypes }: any) => {
           <aside>
             <button
               className={showType ? "all" : "all active"}
-              onClick={() => { setShowType(false), setShowResults(false), setMessage(false), setShowMore(''), setPokeCounter(0) }}
+              onClick={() => { setShowType(false), setShowResults(false), setMessage(false), setShowMore(''), setPokeCounter(0), setShowAll(true), setText('') }}
             >
               <div className="icon">
                 <Image
@@ -248,7 +257,7 @@ const Home: React.FC = ({ pokemonInfo, pokeList, listAllTypes }: any) => {
               ))}
           </aside>
           <div className="right-area">
-            {message && !showResults &&
+            {message && 
               <>
                 <div className="top-area">
                   <Image
@@ -293,8 +302,8 @@ const Home: React.FC = ({ pokemonInfo, pokeList, listAllTypes }: any) => {
                 </div>
               </>
             )}
-            {!showType && !showResults && !message && (
-              <>
+              { showAll && 
+                <>
                 <div className="top-area">
                   <Image
                     src={pokeballIconRed}
@@ -378,8 +387,9 @@ const Home: React.FC = ({ pokemonInfo, pokeList, listAllTypes }: any) => {
                   Load more Pokemons
                 </button>
               </>
-            )}
-            {showType && !showResults && !message && (
+              }
+
+            {showType && (
               <>
                 <div className="top-area">
                   <Image
