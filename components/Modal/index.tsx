@@ -23,13 +23,13 @@ import water from "@/assets/icon-types/water.svg";
 
 export const Modal: React.FC<{
   type: any;
-  id: any;
+  id: number;
   image: any;
   name: string;
-  stats: any;
+  stats: object[];
   height: number;
   weight: number;
-  abilities: any;
+  abilities: any | object[];
   closeModal: any;
   weakness: any;
   modal:boolean
@@ -104,10 +104,13 @@ export const Modal: React.FC<{
               />
             </div>
             <div className="image">
-              <img
+              <Image
                 src={image}
                 title={`${name} | is type ${type[0].type.name}`}
                 alt={type[0].type.name}
+                width={202}
+                height={180}
+                quality={90}
               />
             </div>
           </div>
@@ -167,7 +170,7 @@ export const Modal: React.FC<{
                 ))}
                 </div>
                 <div className="show-stats-bar">
-                {stats.map(({ base_stat }: any, index: number) => (
+                {stats.map(({ base_stat }:any, index: number) => (
                       <div className="single-bar" key={base_stat + index}>
                         <div
                           className="base-stat"

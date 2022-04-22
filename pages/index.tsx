@@ -38,7 +38,7 @@ export async function getStaticProps() {
 
   const allTypes = await api.get("type");
 
-  let listPoke: any = [];
+  let listPoke: Array<Object> = [];
   for (let i = 0; i < response.data.results.length; i++) {
     listPoke.push(singlePoke[i].data);
   }
@@ -114,47 +114,25 @@ const Home: React.FC = ({ pokemonInfo, pokeList, listAllTypes }: any) => {
     },
   ];
 
-  const [dados, setDados] = useState([]);
-  const [showType, setShowType] = useState(false);
-  const [modal, setModal] = useState(false);
-  const [showAll, setShowAll] = useState(true)
-  const [text, setText] = useState("");
-  const [showMore, setShowMore] = useState<any>([])
-  const [pokeCounter, setPokeCounter] = useState(0)
-  const [message, setMessage] = useState<any>('')
-  const [search, setSearch] = useState<{
-    type: any;
-    allTypes: any;
-    id: number;
-    image: any;
-    name: string;
-    stats: any;
-    height: number;
-    weight: number;
-    abilities: any;
-    types: any;
-    sprites: any;
-  }>({
-    type: null,
-    allTypes: null,
-    id: 0,
-    image: null,
-    name: '',
-    stats: null,
-    height: 0,
-    weight: 0,
-    abilities: null,
-    types: null,
-    sprites: null
-  });
+  const [dados, setDados] = useState<object[]>([]);
+  const [showType, setShowType] = useState<boolean>(false);
+  const [modal, setModal] = useState<boolean>(false);
+  const [showAll, setShowAll] = useState<boolean>(true)
+  const [text, setText] = useState<string>("");
+  const [showMore, setShowMore] = useState<object[]>([])
+  const [pokeCounter, setPokeCounter] = useState<number>(0)
+  const [message, setMessage] = useState<boolean | string>(false)
+  const [search, setSearch] = useState<any>();
   const [showResults, setShowResults] = useState(false);
-  const handleApi = async (name: any) => {
+  const [nameType, setNameType] = useState<string>('');
+  
+  const handleApi = async (name: string) => {
     const response = await api.get(name);
     const types = await Promise.all(
       response.data.pokemon.map(({ pokemon }: any) => api.get(pokemon.url))
     );
 
-    let listTypes: any = [];
+    let listTypes: object[] = [];
     for (let i = 0; i < response.data.pokemon.length; i++) {
       listTypes.push(types[i].data);
     }
@@ -164,6 +142,7 @@ const Home: React.FC = ({ pokemonInfo, pokeList, listAllTypes }: any) => {
     setShowAll(false);
     setMessage(false);
     setText('')
+    setNameType(name.replace('type/', ''))
   };
 
   const handleSearch = () => {
@@ -191,7 +170,7 @@ const Home: React.FC = ({ pokemonInfo, pokeList, listAllTypes }: any) => {
       response.data.results.map(({ url }: any) => api.get(url))
     );
 
-    let listMorePokemon: any = [];
+    let listMorePokemon: object[] = [];
     for (let i = 0; i < response.data.results.length; i++) {
       listMorePokemon.push(morePokemon[i].data);
     }
@@ -221,13 +200,14 @@ const Home: React.FC = ({ pokemonInfo, pokeList, listAllTypes }: any) => {
           <aside>
             <button
               className={showType ? "all" : "all active"}
-              onClick={() => { setShowType(false), setShowResults(false), setMessage(false), setShowMore(''), setPokeCounter(0), setShowAll(true), setText('') }}
+              onClick={() => { setShowType(false), setShowResults(false), setMessage(false), setShowMore([]), setPokeCounter(0), setShowAll(true), setText('') }}
             >
               <div className="icon">
                 <Image
                   src={pokeballIconBlue}
                   title="See all pokemons"
                   alt="icon all"
+                  aria-controls="all-pokemon"
                 />
               </div>
               <span>All</span>
@@ -241,9 +221,9 @@ const Home: React.FC = ({ pokemonInfo, pokeList, listAllTypes }: any) => {
                 <button
                   aria-controls="pokelist"
                   id="button"
-                  className={type.name}
+                  className={nameType === type.name ? `${type.name} active` : type.name}
                   key={type + index}
-                  onClick={() => handleApi(`type/${index + 1}`)}
+                  onClick={() => handleApi(`type/${type.name}`)}
                 >
                   <div className="icon">
                     <Image
@@ -285,7 +265,7 @@ const Home: React.FC = ({ pokemonInfo, pokeList, listAllTypes }: any) => {
                 </div>
                 <div
                   className="grid-list"
-                  id="pokelist"
+                  id="all-pokemons"
                   aria-labelledby="button"
                 >
                   <Card
@@ -314,7 +294,7 @@ const Home: React.FC = ({ pokemonInfo, pokeList, listAllTypes }: any) => {
                 </div>
                 <div
                   className="grid-list"
-                  id="pokelist"
+                  id="all-pokemons"
                   aria-labelledby="button"
                 >
                   {pokemonInfo.map(
@@ -399,7 +379,10 @@ const Home: React.FC = ({ pokemonInfo, pokeList, listAllTypes }: any) => {
                   />
                   <span>{dados.length} Pokemons</span>
                 </div>
-                <div className="grid-list">
+                <div className="grid-list"
+                id="pokelist"
+                aria-labelledby="button"
+                >
                   {dados.filter((filteredPokemon: any) => {
                     if (filteredPokemon.sprites.front_default !== null) {
                       return filteredPokemon

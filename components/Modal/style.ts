@@ -69,56 +69,69 @@ export const ModalBox = styled.div`
     z-index: 2;
     width: 100%;
     max-width: 71rem;
-    height: 50.8rem;
+    min-height: 50.8rem;
     box-shadow: 0px 10px 40px rgba(13, 12, 71, 0.05);
     border-radius: 16px;
     animation: ${slideUp} .3s ease forwards;
     &.bug {
         background: var(--white) url(${bug.src}) no-repeat left top;
+        background-size: contain;
     }
 
     &.dark {
         background: var(--white) url(${dark.src}) no-repeat left top;
+        background-size: contain;
     }
 
     &.dragon {
         background: var(--white) url(${dragon.src}) no-repeat left top;
+        background-size: contain;
     }
 
     &.electric {
         background: var(--white) url(${electric.src}) no-repeat left top;
+        background-size: contain;
     }
 
     &.fairy {
         background: var(--white) url(${fairy.src}) no-repeat left top;
+        background-size: contain;
     }
 
     &.fighting {
         background: var(--white) url(${fighting.src}) no-repeat left top;
+        background-size: contain;
     }
 
     &.fire {
         background: var(--white) url(${fire.src}) no-repeat left top;
+        background-size: contain;
     }
 
     &.flying {
         background: var(--white) url(${flying.src}) no-repeat left top;
+        background-size: contain;
     }
 
     &.ghost {
         background: var(--white) url(${ghost.src}) no-repeat left top;
+        background-size: contain;
     }
 
     &.grass {
-        background: var(--white) url(${grass.src}) no-repeat left top;
+        .left-modal {
+        background: var(--white) url(${grass.src}) no-repeat;
+        }
     }
 
     &.ground {
         background: var(--white) url(${ground.src}) no-repeat left top;
+        background-size: contain;
     }
 
     &.ice {
         background: var(--white) url(${ice.src}) no-repeat left top;
+        background-size: contain;
     }
 
     &.normal {
@@ -127,22 +140,27 @@ export const ModalBox = styled.div`
 
     &.poison {
         background: var(--white) url(${poison.src}) no-repeat left top;
+        background-size: contain;
     }
 
     &.psychic {
         background: var(--white) url(${psychic.src}) no-repeat left top;
+        background-size: contain;
     }
 
     &.rock {
         background: var(--white) url(${rock.src}) no-repeat left top;
+        background-size: contain;
     }
 
     &.steel {
         background: var(--white) url(${steel.src}) no-repeat left top;
+        background-size: contain;
     }
 
     &.water {
         background: var(--white) url(${water.src}) no-repeat left top;
+        background-size: contain;
     }
 
     .close-button {
@@ -162,6 +180,8 @@ export const ModalBox = styled.div`
         padding-left: 1.4rem;
         padding-top: 2rem;
         margin-right: 4.8rem;
+        background-size: cover;
+        border-radius: 16px 0 0 16px;
         .icon {
             width: 3.4rem;
             height: 3.4rem;
@@ -462,6 +482,7 @@ export const ModalBox = styled.div`
         }
 
         .stats {
+            padding-bottom: 3rem;
             .title-stats {
                 font-weight: 600;
                 font-size: 1.3rem;

@@ -23,10 +23,10 @@ import { Modal } from "../Modal"
 import { useEffect, useState } from "react"
 import { api } from "services/api"
 
-export const Card: React.FC <{type: any, allTypes:any, id:any, image:any, name:string, stats:any, height:number, weight:number, abilities:any}> = ({type, id, image, name, stats, height, weight, abilities, allTypes}) => {
+export const Card: React.FC <{type: string, allTypes:object[], id:number, image:any, name:string, stats:object[], height:number, weight:number, abilities:object[]}> = ({type, id, image, name, stats, height, weight, abilities, allTypes}) => {
 
-    const [modal, setModal] = useState(false)
-    const [weakness, setWeakness] = useState([])
+    const [modal, setModal] = useState<boolean>(false)
+    const [weakness, setWeakness] = useState<object[]>([])
 
     const handleModalStatus = async (type:any) => {
         const response = await api.get(type)
@@ -42,7 +42,7 @@ export const Card: React.FC <{type: any, allTypes:any, id:any, image:any, name:s
         <>
         <CardContent className={type} onClick={() => {handleModalStatus(`type/${type}`)}}>
             <div className="image">
-                <img src={image} alt={name} title={name} />
+                <Image src={image} alt={name} title={name} layout='fill' quality={90}/>
                 <div className="bg"></div>
             </div>
 
