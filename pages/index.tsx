@@ -116,7 +116,6 @@ const Home: React.FC = ({ pokemonInfo, pokeList, listAllTypes }: any) => {
 
   const [dados, setDados] = useState<object[]>([]);
   const [showType, setShowType] = useState<boolean>(false);
-  const [modal, setModal] = useState<boolean>(false);
   const [showAll, setShowAll] = useState<boolean>(true)
   const [text, setText] = useState<string>("");
   const [showMore, setShowMore] = useState<object[]>([])
@@ -125,6 +124,8 @@ const Home: React.FC = ({ pokemonInfo, pokeList, listAllTypes }: any) => {
   const [search, setSearch] = useState<any>();
   const [showResults, setShowResults] = useState(false);
   const [nameType, setNameType] = useState<string>('');
+  const [selectItem, setSelectItem] = useState<string>('All');
+  const [activeSubmenu, setActiveSubmenu] = useState<boolean>(false)
   
   const handleApi = async (name: string) => {
     const response = await api.get(name);
@@ -153,6 +154,7 @@ const Home: React.FC = ({ pokemonInfo, pokeList, listAllTypes }: any) => {
         setShowAll(false)
         setShowType(false)
         setMessage(false)
+        setSelectItem('All')
       }).catch((error) => {
         if (error.response) {
           setText('')
@@ -160,6 +162,7 @@ const Home: React.FC = ({ pokemonInfo, pokeList, listAllTypes }: any) => {
           setShowResults(false)
           setShowAll(false)
           setShowType(false)
+          setSelectItem('All')
         }
       })
   };
@@ -240,12 +243,57 @@ const Home: React.FC = ({ pokemonInfo, pokeList, listAllTypes }: any) => {
             {message && 
               <>
                 <div className="top-area">
-                  <Image
-                    src={pokeballIconRed}
-                    title="Numbers of pokemons"
-                    alt="Numbers of Pokemon"
-                  />
-                  <span>0 Pokemon</span>
+                  <div className="left">
+                    <Image
+                      src={pokeballIconRed}
+                      title="Numbers of pokemons"
+                      alt="Numbers of Pokemon"
+                    />
+                    <span>0 Pokemons</span>
+                  </div>
+                  <div className="custom-select">
+                    <div className={activeSubmenu ? 'selected-item active' : 'selected-item'} onClick={() => {setActiveSubmenu(!activeSubmenu)}}>
+                      <span>Show: <strong>{selectItem}</strong></span>
+                    </div>
+                    <div className={activeSubmenu ? 'custom-box-type active' : 'custom-box-type'}>
+                      <button
+                        onClick={() => { setShowType(false), setShowResults(false), setMessage(false), setShowMore([]), setPokeCounter(0), setShowAll(true), setText(''), setSelectItem('All'), setActiveSubmenu(false) }}
+                      >
+                        <div className="icon">
+                          <Image
+                            src={pokeballIconBlue}
+                            title="See all pokemons"
+                            alt="icon all"
+                            aria-controls="all-pokemon"
+                          />
+                        </div>
+                        <span>All</span>
+                      </button>
+                      {listAllTypes.results
+                        .filter((type: any) => {
+                          if (type.name !== "unknown" && type.name !== "shadow")
+                            return type;
+                        })
+                        .map((type: any, index: number) => (
+                          <button
+                            aria-controls="pokelist"
+                            id="button"
+                            className={nameType === type.name ? `${type.name} active` : type.name}
+                            key={type + index}
+                            onClick={() => {handleApi(`type/${type.name}`), setSelectItem(type.name), setActiveSubmenu(false)}}
+                          >
+                            <div className="icon">
+                              <Image
+                                src={iconTypes[index].icon}
+                                title={type.name}
+                                alt={type.name}
+                              />
+                            </div>
+                            <span>{type.name}</span>
+                          </button>
+                        ))}
+                    </div>
+                  </div>
                 </div>
                 <div className="error-message">
                   <h4>No Pokemon with name or id: <span>{message}</span> has found.</h4>
@@ -256,12 +304,57 @@ const Home: React.FC = ({ pokemonInfo, pokeList, listAllTypes }: any) => {
             {showResults && (
               <>
                 <div className="top-area">
-                  <Image
-                    src={pokeballIconRed}
-                    title="Numbers of pokemons"
-                    alt="Numbers of Pokemon"
-                  />
-                  <span>1 Pokemon</span>
+                  <div className="left">
+                    <Image
+                      src={pokeballIconRed}
+                      title="Numbers of pokemons"
+                      alt="Numbers of Pokemon"
+                    />
+                    <span>1 Pokemon</span>
+                  </div>
+                  <div className="custom-select">
+                    <div className={activeSubmenu ? 'selected-item active' : 'selected-item'} onClick={() => {setActiveSubmenu(!activeSubmenu)}}>
+                      <span>Show: <strong>{selectItem}</strong></span>
+                    </div>
+                    <div className={activeSubmenu ? 'custom-box-type active' : 'custom-box-type'}>
+                      <button
+                        onClick={() => { setShowType(false), setShowResults(false), setMessage(false), setShowMore([]), setPokeCounter(0), setShowAll(true), setText(''), setSelectItem('All'), setActiveSubmenu(false) }}
+                      >
+                        <div className="icon">
+                          <Image
+                            src={pokeballIconBlue}
+                            title="See all pokemons"
+                            alt="icon all"
+                            aria-controls="all-pokemon"
+                          />
+                        </div>
+                        <span>All</span>
+                      </button>
+                      {listAllTypes.results
+                        .filter((type: any) => {
+                          if (type.name !== "unknown" && type.name !== "shadow")
+                            return type;
+                        })
+                        .map((type: any, index: number) => (
+                          <button
+                            aria-controls="pokelist"
+                            id="button"
+                            className={nameType === type.name ? `${type.name} active` : type.name}
+                            key={type + index}
+                            onClick={() => {handleApi(`type/${type.name}`), setSelectItem(type.name), setActiveSubmenu(false)}}
+                          >
+                            <div className="icon">
+                              <Image
+                                src={iconTypes[index].icon}
+                                title={type.name}
+                                alt={type.name}
+                              />
+                            </div>
+                            <span>{type.name}</span>
+                          </button>
+                        ))}
+                    </div>
+                  </div>
                 </div>
                 <div
                   className="grid-list"
@@ -285,12 +378,57 @@ const Home: React.FC = ({ pokemonInfo, pokeList, listAllTypes }: any) => {
               { showAll && 
                 <>
                 <div className="top-area">
-                  <Image
-                    src={pokeballIconRed}
-                    title="Numbers of pokemons"
-                    alt="Numbers of Pokemon"
-                  />
-                  <span>{pokeList.count} Pokemons</span>
+                  <div className="left">
+                    <Image
+                      src={pokeballIconRed}
+                      title="Numbers of pokemons"
+                      alt="Numbers of Pokemon"
+                    />
+                    <span>{pokeList.count} Pokemons</span>
+                  </div>
+                  <div className="custom-select">
+                    <div className={activeSubmenu ? 'selected-item active' : 'selected-item'} onClick={() => {setActiveSubmenu(!activeSubmenu)}}>
+                      <span>Show: <strong>{selectItem}</strong></span>
+                    </div>
+                    <div className={activeSubmenu ? 'custom-box-type active' : 'custom-box-type'}>
+                      <button
+                        onClick={() => { setShowType(false), setShowResults(false), setMessage(false), setShowMore([]), setPokeCounter(0), setShowAll(true), setText(''), setSelectItem('All'), setActiveSubmenu(false) }}
+                      >
+                        <div className="icon">
+                          <Image
+                            src={pokeballIconBlue}
+                            title="See all pokemons"
+                            alt="icon all"
+                            aria-controls="all-pokemon"
+                          />
+                        </div>
+                        <span>All</span>
+                      </button>
+                      {listAllTypes.results
+                        .filter((type: any) => {
+                          if (type.name !== "unknown" && type.name !== "shadow")
+                            return type;
+                        })
+                        .map((type: any, index: number) => (
+                          <button
+                            aria-controls="pokelist"
+                            id="button"
+                            className={nameType === type.name ? `${type.name} active` : type.name}
+                            key={type + index}
+                            onClick={() => {handleApi(`type/${type.name}`), setSelectItem(type.name), setActiveSubmenu(false)}}
+                          >
+                            <div className="icon">
+                              <Image
+                                src={iconTypes[index].icon}
+                                title={type.name}
+                                alt={type.name}
+                              />
+                            </div>
+                            <span>{type.name}</span>
+                          </button>
+                        ))}
+                    </div>
+                  </div>
                 </div>
                 <div
                   className="grid-list"
@@ -372,12 +510,57 @@ const Home: React.FC = ({ pokemonInfo, pokeList, listAllTypes }: any) => {
             {showType && (
               <>
                 <div className="top-area">
-                  <Image
-                    src={pokeballIconRed}
-                    title="Numbers of pokemons"
-                    alt="Numbers of Pokemon"
-                  />
-                  <span>{dados.length} Pokemons</span>
+                  <div className="left">
+                    <Image
+                      src={pokeballIconRed}
+                      title="Numbers of pokemons"
+                      alt="Numbers of Pokemon"
+                    />
+                    <span>{dados.length} Pokemons</span>
+                  </div>
+                  <div className="custom-select">
+                    <div className={activeSubmenu ? 'selected-item active' : 'selected-item'} onClick={() => {setActiveSubmenu(!activeSubmenu)}}>
+                      <span>Show: <strong>{selectItem}</strong></span>
+                    </div>
+                    <div className={activeSubmenu ? 'custom-box-type active' : 'custom-box-type'}>
+                      <button
+                        onClick={() => { setShowType(false), setShowResults(false), setMessage(false), setShowMore([]), setPokeCounter(0), setShowAll(true), setText(''), setSelectItem('All'), setActiveSubmenu(false) }}
+                      >
+                        <div className="icon">
+                          <Image
+                            src={pokeballIconBlue}
+                            title="See all pokemons"
+                            alt="icon all"
+                            aria-controls="all-pokemon"
+                          />
+                        </div>
+                        <span>All</span>
+                      </button>
+                      {listAllTypes.results
+                        .filter((type: any) => {
+                          if (type.name !== "unknown" && type.name !== "shadow")
+                            return type;
+                        })
+                        .map((type: any, index: number) => (
+                          <button
+                            aria-controls="pokelist"
+                            id="button"
+                            className={nameType === type.name ? `${type.name} active` : type.name}
+                            key={type + index}
+                            onClick={() => {handleApi(`type/${type.name}`), setSelectItem(type.name), setActiveSubmenu(false)}}
+                          >
+                            <div className="icon">
+                              <Image
+                                src={iconTypes[index].icon}
+                                title={type.name}
+                                alt={type.name}
+                              />
+                            </div>
+                            <span>{type.name}</span>
+                          </button>
+                        ))}
+                    </div>
+                  </div>
                 </div>
                 <div className="grid-list"
                 id="pokelist"

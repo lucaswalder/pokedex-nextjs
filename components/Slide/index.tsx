@@ -49,7 +49,9 @@ export const Slide: React.FC = () => {
                             <SlideContent className={color}>
                                 <div className="container">
                                     <div className="top">
-                                        <Image src={logo} alt="Logo Pokemon" title='Logo Pokemon'/>
+                                        <div className="logo">
+                                            <Image src={logo} alt="Logo Pokemon" title='Logo Pokemon'/>
+                                            </div>
                                         <span>Case Study  	&minus;&gt;  <strong>CodeBoost</strong></span>
                                     </div>
                                     <div className={`tag ${color}`}>

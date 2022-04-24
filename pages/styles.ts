@@ -1,5 +1,7 @@
 import styled from "styled-components";
 
+import arrowDown from '@/assets/arrow-down-select.svg'
+
 export const MainContent = styled.section`
     .container {
         display: flex;
@@ -15,8 +17,11 @@ export const MainContent = styled.section`
 
         .top-area {
             display: flex;
-            align-items: center;
             margin-bottom: 7rem;
+            justify-content: space-between;
+           .left {
+               display: flex;
+               align-items: center;
             span {
                 display: block;
                 font-family: 'Montserrat', sans-serif;
@@ -26,6 +31,188 @@ export const MainContent = styled.section`
                 color: #4D5053;
                 margin-left: 1.8rem;
             }
+           }
+
+           .custom-select {
+               width: 100%;
+               max-width: 40rem;
+               position: relative;
+               .selected-item {
+                    display: flex;
+                    align-items: center;
+                    font-family: 'Montserrat', sans-serif;
+                    font-size: 1.8rem;
+                    line-height: 150%;
+                    color: #4D5053;
+                    cursor: pointer;
+                    max-width: 100%;
+                    height: 5.6rem;
+                    border: 1px solid #A0AFBA;
+                    background: url(${arrowDown.src}) no-repeat right 21px center;
+                    padding: 0 2.1rem;
+                    border-radius: 5px;
+                    transform: border-radius .3s ease;
+                    strong {
+                        text-transform: capitalize;
+                    }
+                    &.active {
+                        border-radius: 5px 5px 0 0;
+                    }
+
+               }
+               .custom-box-type {
+                   display: flex;
+                   flex-direction: column;
+                   height: 0;
+                   pointer-events: none;
+                   overflow: scroll;
+                   position: absolute;
+                   top: 5.6rem;
+                   left: 0;
+                   width: 100%;
+                   padding: 0;
+                   border-radius: 0 0 5px 5px;
+                   z-index: 1;
+                   background: var(--white);
+                   transform: all .3s all;
+                   &::-webkit-scrollbar {
+                    width: 3px;
+                    }
+                    
+                    &::-webkit-scrollbar-thumb {
+                    background: var(--blue-primary); 
+                    border-radius: 10px;
+                    }
+                   &.active {
+                       height: 28rem;
+                       pointer-events: all;
+                       padding: 2.1rem;
+                       border: 1px solid #A0AFBA;
+                       border-top: none;
+
+                   }
+                   button {
+                       display: flex;
+                       padding: 1.5rem 0;
+                       align-items: center;
+                       span {
+                        font-weight: 500;
+                        font-size: 1.6rem;
+                        line-height: 150%;
+                        text-transform: capitalize;
+                        margin-left: 2rem;
+                        
+                       }
+                       &.normal {
+                    span {
+                        color: var(--type-normal);
+                    }
+                }
+
+                    &.fighting {
+                        span {
+                            color: var(--type-fighting);
+                        }
+                    }
+
+                    &.flying {
+                        span {
+                            color: var(--type-flying);
+                        }
+                    }
+
+                    &.poison {
+                        span {
+                            color: var(--type-poison);
+                        }
+                    }
+
+                    &.ground {
+                        span {
+                            color: var(--type-ground);
+                        }
+                    }
+
+                    &.rock {
+                        span {
+                            color: var(--type-rock);
+                        }
+                    }
+
+                    &.bug {
+                        span {
+                            color: var(--type-bug);
+                        }
+                    }
+
+                    &.ghost {
+                        span {
+                            color: var(--type-ghost);
+                        }
+                    }
+
+                    &.steel {
+                        span {
+                            color: var(--type-steel);
+                        }
+                    }
+
+                    &.fire {
+                        span {
+                            color: var(--type-fire);
+                        }
+                    }
+
+                    &.water {
+                        span {
+                            color: var(--type-water);
+                        }
+                    }
+
+                    &.grass {
+                        span {
+                            color: var(--type-grass);
+                        }
+                    }
+
+                    &.electric {
+                        span {
+                            color: var(--type-electric);
+                        }
+                    }
+
+                    &.psychic {
+                        span {
+                            color: var(--type-psychic);
+                        }
+                    }
+
+                    &.ice {
+                        span {
+                            color: var(--type-ice);
+                        }
+                    }
+
+                    &.dragon {
+                        span {
+                            color: var(--type-dragon);
+                        }
+                    }
+
+                    &.dark {
+                        span {
+                            color: var(--type-dark);
+                        }
+                    }
+
+                    &.fairy {
+                        span {
+                            color: var(--type-fairy);
+                        }
+                    }
+                   }
+               }
+           }
         }
         .grid-list {
             display: grid;
@@ -222,6 +409,54 @@ export const MainContent = styled.section`
                     span {
                         color: var(--type-fairy);
                     }
+                }
+            }
+        }
+    }
+
+    @media (max-width: 1050px) {
+        .container {
+            aside {
+                max-width: 16.9rem;
+            }
+        }
+    }
+
+    @media (max-width: 991px) {
+        .container {
+            aside {
+                display: none;
+            }
+            .right-area {
+                padding-left: 0;
+                border: none;
+                .top-area {
+                    .custom-select {
+                        display: block;
+                    }
+                }
+            }
+        }
+    }
+
+    @media (max-width: 991px) {
+        .container {
+            .right-area {
+                padding-left: 0;
+                border: none;
+                .top-area {
+                   flex-direction: column;
+                   align-items: center;
+                   margin-bottom: 5.5rem;
+                   .custom-select {
+                       margin-top: 4.6rem;
+                       max-width: 100%;
+                   }
+                }
+                .grid-list {
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
                 }
             }
         }

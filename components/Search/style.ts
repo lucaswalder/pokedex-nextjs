@@ -58,4 +58,17 @@ export const SearchContent = styled.section`
             cursor: pointer;
         }
     }
+
+    @media (max-width: 480px) {
+        padding: 19rem 0 5.1rem;
+        .container {
+            flex-direction: column;
+        }
+
+        h2 {
+            font-size: 2.8rem;
+            max-width: 100%;
+            margin-bottom: 4.1rem;
+        }
+    }
 `;

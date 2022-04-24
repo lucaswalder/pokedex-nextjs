@@ -20,7 +20,7 @@ const upAndDown = keyframes`
     }
 `;
 
-export const AreaSlide = styled.div`
+export const AreaSlide = styled.section`
     .slideHero {
         overflow: visible;
         .swiper-pagination {
@@ -178,6 +178,36 @@ export const  SlideContent = styled.div`
         bottom: 7.7rem;
         span {
             background: var(--white);
+        }
+    }
+    @media (max-width: 480px) {
+        padding-top: 2.5rem;
+        height: 72.1rem;
+        background-size: contain;
+        .top {
+            margin-bottom: 6rem;
+            .logo{
+                max-width: 12.6rem;
+            }
+        }
+
+        h1 {
+            font-size: 4.8rem;
+            line-height: 5.9rem;
+            text-align: center;
+            margin-bottom: 2.4rem;
+            max-width: 32.7rem;
+        }
+        .image-pokeball {
+            bottom: -26.6rem;
+            margin-left: -36rem;
+            margin-right: -18rem;
+        }
+        .explore-btn {
+            display: none;
+        }
+        .pagination {
+            display: none;
         }
     }
 `;
