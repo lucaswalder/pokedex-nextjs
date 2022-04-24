@@ -622,4 +622,36 @@ export const ModalBox = styled.div`
             }
         }
     }
+
+    @media (max-width: 320px) {
+        height: 60%;
+        overflow-y: scroll;
+        overflow-x: hidden;
+        .close-button {
+            top: 0;
+            left: 0;
+            right: initial;
+        }
+        .right-modal {
+            .all-weaknesses {
+                .list-weaknesses {
+                    flex-wrap: wrap;
+                    gap: 1rem;
+                    .tag {
+                        &:not(:last-child) {
+                            margin-right: 0;
+                        }
+                    }
+                }
+            }
+            .stats {
+                .all-stats {
+                    justify-content: space-between;
+                    .show-stats-bar {
+                        max-width: 18rem;
+                    }
+                }
+            }
+        }
+    }
 `;
