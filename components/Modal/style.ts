@@ -74,23 +74,31 @@ export const ModalBox = styled.div`
     border-radius: 16px;
     animation: ${slideUp} .3s ease forwards;
     &.bug {
-        background: var(--white) url(${bug.src}) no-repeat left top;
-        background-size: contain;
+        .left-modal {
+        background: var(--white) url(${bug.src}) no-repeat center center;
+        background-size: cover;
+        }
     }
 
     &.dark {
-        background: var(--white) url(${dark.src}) no-repeat left top;
-        background-size: contain;
+        .left-modal {
+        background: var(--white) url(${dark.src}) no-repeat center center;
+        background-size: cover;
+        }
     }
 
     &.dragon {
-        background: var(--white) url(${dragon.src}) no-repeat left top;
-        background-size: contain;
+        .left-modal {
+        background: var(--white) url(${dragon.src}) no-repeat center center;
+        background-size: cover;
+        }
     }
 
     &.electric {
-        background: var(--white) url(${electric.src}) no-repeat left top;
-        background-size: contain;
+        .left-modal {
+        background: var(--white) url(${electric.src}) no-repeat center center;
+        background-size: cover;
+        }
     }
 
     &.fairy {
@@ -99,34 +107,45 @@ export const ModalBox = styled.div`
     }
 
     &.fighting {
-        background: var(--white) url(${fighting.src}) no-repeat left top;
-        background-size: contain;
+        .left-modal {
+        background: var(--white) url(${fighting.src}) no-repeat center center;
+        background-size: cover;
+        }
     }
 
     &.fire {
-        background: var(--white) url(${fire.src}) no-repeat left top;
-        background-size: contain;
+        .left-modal {
+        background: var(--white) url(${fire.src}) no-repeat center center;
+        background-size: cover;
+        }
     }
 
     &.flying {
-        background: var(--white) url(${flying.src}) no-repeat left top;
-        background-size: contain;
+        .left-modal {
+        background: var(--white) url(${flying.src}) no-repeat center center;
+        background-size: cover;
+        }
     }
 
     &.ghost {
-        background: var(--white) url(${ghost.src}) no-repeat left top;
-        background-size: contain;
+        .left-modal {
+        background: var(--white) url(${ghost.src}) no-repeat center center;
+        background-size: cover;
+        }
     }
 
     &.grass {
         .left-modal {
-        background: var(--white) url(${grass.src}) no-repeat;
+        background: var(--white) url(${grass.src}) no-repeat center center;
+        background-size: cover;
         }
     }
 
     &.ground {
-        background: var(--white) url(${ground.src}) no-repeat left top;
-        background-size: contain;
+        .left-modal {
+        background: var(--white) url(${ground.src}) no-repeat center center;
+        background-size: cover;
+        }
     }
 
     &.ice {
@@ -135,32 +154,45 @@ export const ModalBox = styled.div`
     }
 
     &.normal {
-        background: var(--white) url(${normal.src}) no-repeat left top;
+        .left-modal {
+        background: var(--white) url(${normal.src}) no-repeat center center;
+        background-size: cover;
+        }
     }
 
     &.poison {
-        background: var(--white) url(${poison.src}) no-repeat left top;
-        background-size: contain;
+        .left-modal {
+        background: var(--white) url(${poison.src}) no-repeat center center;
+        background-size: cover;
+        }
     }
 
     &.psychic {
-        background: var(--white) url(${psychic.src}) no-repeat left top;
-        background-size: contain;
+        .left-modal {
+        background: var(--white) url(${psychic.src}) no-repeat center center;
+        background-size: cover;
+        }
     }
 
     &.rock {
-        background: var(--white) url(${rock.src}) no-repeat left top;
-        background-size: contain;
+        .left-modal {
+        background: var(--white) url(${rock.src}) no-repeat center center;
+        background-size: cover;
+        }
     }
 
     &.steel {
-        background: var(--white) url(${steel.src}) no-repeat left top;
-        background-size: contain;
+        .left-modal {
+        background: var(--white) url(${steel.src}) no-repeat center center;
+        background-size: cover;
+        }
     }
 
     &.water {
-        background: var(--white) url(${water.src}) no-repeat left top;
-        background-size: contain;
+        .left-modal {
+        background: var(--white) url(${water.src}) no-repeat center center;
+        background-size: cover;
+        }
     }
 
     .close-button {
@@ -543,6 +575,48 @@ export const ModalBox = styled.div`
                         &:not(:last-child) {
                             margin-bottom: 2.5rem;
                         }
+                    }
+                }
+            }
+        }
+    }
+    @media (max-width: 480px) {
+        flex-direction: column;
+        max-width: 100%;
+        height: auto;
+        .left-modal {
+            max-width: 100%;
+            height: 12.5rem;
+            margin-right: 0;
+            border-radius: 16px 16px 0 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            .icon {
+                position: absolute;
+                top: 1.5rem;
+                right: 1.8rem;
+            }
+
+            .image {
+                margin-top: 1.5rem;
+                width: 13rem;
+                height: 12rem;
+            }
+        }
+        .right-modal {
+            margin-top: 5.5rem;
+            padding: 0 2.4rem;
+            .top-modal {
+                h2 {
+                    font-size: 2.4rem;
+                }
+            }
+            .stats {
+                .all-stats {
+                    justify-content: space-between;
+                    .show-stats-bar {
+                        max-width: 19.4rem;
                     }
                 }
             }

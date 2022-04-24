@@ -37,6 +37,7 @@ export const MainContent = styled.section`
                width: 100%;
                max-width: 40rem;
                position: relative;
+               display: none;
                .selected-item {
                     display: flex;
                     align-items: center;
@@ -439,7 +440,7 @@ export const MainContent = styled.section`
         }
     }
 
-    @media (max-width: 991px) {
+    @media (max-width: 480px) {
         .container {
             .right-area {
                 padding-left: 0;
