@@ -28,7 +28,7 @@ import water from "@/assets/icon-types/water.svg";
 import iconFav from '@/assets/icon-favorite.svg'
 
 export const Modal: React.FC<{
-  type: any;
+  type:any;
   id: number;
   image: any;
   name: string;
@@ -55,11 +55,25 @@ export const Modal: React.FC<{
 
   const [showMoreAbilities, setShowMoreAbilities] = useState<boolean>(false)
   const [addFavorite, setAddFavorite] = useState<boolean>(false)
+  const [errorMessage, setErrorMessage] = useState<boolean>(false)
 
-  const  handleAddPokemonLocalStore = async (name:string) => {
-    const response = await api.get(`pokemon/${name}`)
-    saveLink('@mypoke', response.data)
+  const  handleAddPokemonLocalStore = () => {
+    try {
+      saveLink('@mypoke', {
+        name: name,
+        image: image,
+        id:id,
+        type: type,
+        stats:stats,
+        height:height,
+        weight:weight,
+        abilities:abilities,
+      })
+    } catch {
+      setErrorMessage(true)
+    }
   }
+ 
   const handleFavorite = () => {
     let favoritesPokemons = getsavedPokemons('@mypoke')
     const hasPokemon = favoritesPokemons.some( (item:any) => item.id === id )
@@ -147,9 +161,12 @@ export const Modal: React.FC<{
               <span className="id-modal">
                 #{id < 10 ? `00${id}` : id < 100 ? `0${id}` : `${id}`}
               </span>
-              <button className={addFavorite ? 'favorite active' : "favorite"} onClick={() => {handleAddPokemonLocalStore(name), setAddFavorite(true)}}>
+              <button className={addFavorite ? 'favorite active' : "favorite"} onClick={() => {handleAddPokemonLocalStore(), setAddFavorite(true)}}>
                 <Image src={iconFav} alt="Add pokemon to your favorite list" title="Add pokemon to your favorite list" quality={90} />
               </button>
+              {errorMessage && 
+                <p>You cannot add more Pokemons to favorites, all slots are full.</p>
+              }
             </div>
 
             <ul className="all-types">

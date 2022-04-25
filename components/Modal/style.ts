@@ -400,7 +400,7 @@ export const ModalBox = styled.div`
                     }
 
                     &.dark {
-                        .btn-show-more {
+                        .btn-showmore {
                             color: var(--type-dark);
                             background: rgba(89, 87, 97, 0.1);
                         }
@@ -414,7 +414,7 @@ export const ModalBox = styled.div`
                     }
 
                     &.electric {
-                        .btn-show-more{
+                        .btn-showmore{
                             color: var(--type-electric);
                             background: rgba(238, 217, 103, 0.1);
                         }

@@ -41,16 +41,16 @@ const Favorites:React.FC = () => {
             <div className="container">
                 <div className="top">
                     <Image src={pokeballIconRed} alt='Pokeball Icon' title="Pokeball icon" quality={90} />
-                    <span>You have {myFavorites.length} Pokemons in you list.</span>
+                    <span>You have {myFavorites.length} Pokemons in your list.</span>
                 </div>
                 <div className="grid-pokemons">
                 {myFavorites.map(
                     (
                       {
-                        types,
+                        type,
                         name,
                         id,
-                        sprites,
+                        image,
                         stats,
                         height,
                         weight,
@@ -61,17 +61,14 @@ const Favorites:React.FC = () => {
                     <div className="item" key={name + index}>
                       <Card
                         name={name}
-                        type={types[0].type.name}
+                        type={type[0].type.name}
                         id={id}
-                        image={
-                          sprites.other.dream_world.front_default ||
-                          sprites.front_default
-                        }
+                        image={image}
                         stats={stats}
                         height={height}
                         weight={weight}
                         abilities={abilities}
-                        allTypes={types}
+                        allTypes={type}
                       />
                       <button className="btn-del" onClick={()=> handleDelete(id)}>Unfavorite</button>
                       </div>
