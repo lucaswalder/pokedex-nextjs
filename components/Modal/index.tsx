@@ -1,6 +1,8 @@
 import Image from "next/image";
 import { ModalBox, ModalContent } from "./style";
 
+import { useState } from "react";
+
 import closeBtn from "@/assets/close.svg";
 import bug from "../../assets/icon-types/bug.svg";
 import dark from "@/assets/icon-types/dark.svg";
@@ -46,11 +48,14 @@ export const Modal: React.FC<{
   weakness,
   modal
 }) => {
+
+  const [showMoreAbilities, setShowMoreAbilities] = useState<boolean>(false)
+
   return (
     <ModalContent className={modal ? 'active' : ''}>
       <div className="overlay"></div>
         <ModalBox className={modal ? `active ${type[0].type.name}` : `${type[0].type.name}`}>
-          <div className="close-button" onClick={closeModal}>
+          <div className="close-button" onClick={closeModal} onMouseOut={() => setShowMoreAbilities(false)}>
             <Image
               src={closeBtn}
               alt="Icon close modal"
@@ -146,6 +151,19 @@ export const Modal: React.FC<{
               <div className="col-info">
                 <p className="info-title">Abilities</p>
                 <span>{abilities[0].ability.name}</span>
+                <div className={`more-abilities  ${type[0].type.name}`}>
+                  <button className="btn-showmore" onClick={() => setShowMoreAbilities(true)}>Show more</button>
+                  <ul className={ showMoreAbilities ? 'abilities-list active' : 'abilities-list'}>
+                  {abilities.filter((moreAbilities:any) => {
+                    if(moreAbilities.ability.name !== abilities[0].ability.name )
+                    return moreAbilities
+                  }).map((moreAbilities:any, index:number) =>
+                    <li key={index}>
+                      {moreAbilities.ability.name}
+                    </li>
+                  )}
+                  </ul>
+                </div>
               </div>
             </div>
 

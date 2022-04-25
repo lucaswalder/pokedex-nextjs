@@ -367,7 +367,8 @@ export const ModalBox = styled.div`
             }
         }
         .info-single-pokemon{
-            display: flex;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
             margin-bottom: 3.2rem;
             .col-info {
                 .info-title {
@@ -377,6 +378,173 @@ export const ModalBox = styled.div`
                     letter-spacing: -0.01em;
                     color: #7A7D80;
                     margin-bottom: 0.4rem;
+                }
+                .more-abilities {
+                    position: relative;
+                     &.bug {
+                        .btn-showmore {
+                            color: var(--type-bug);
+                            background: rgba(155, 186, 72, 0.1);
+                        }
+                    }
+
+                    &.dark {
+                        .btn-show-more {
+                            color: var(--type-dark);
+                            background: rgba(89, 87, 97, 0.1);
+                        }
+                    }
+
+                    &.dragon {
+                        .btn-showmore{
+                            color: var(--type-dragon);
+                            background: rgba(44, 106, 193, 0.1);
+                        }
+                    }
+
+                    &.electric {
+                        .btn-show-more{
+                            color: var(--type-electric);
+                            background: rgba(238, 217, 103, 0.1);
+                        }
+                    }
+
+                    &.fairy {
+                        .btn-showmore{
+                            color: var(--type-fairy);
+                            background: rgba(226, 150, 225, 0.1);
+                        }
+                    }
+
+                    &.fighting {
+                        .btn-showmore {
+                            color: var(--type-fighting);
+                            background: rgba(196, 77, 97, 0.1);
+                        }
+                    }
+
+                    &.fire {
+                        .btn-showmore {
+                            color: var(--type-fire);
+                            background: rgba(233, 99, 3, 0.1);
+                        }
+                    }
+
+                    &.flying {
+                        .btn-showmore {
+                            color: var(--type-flying);
+                            background: rgba(166, 187, 232, 0.1);
+                        }
+                    }
+
+                    &.ghost {
+                        .btn-showmore {
+                            color: var(--type-ghost);
+                            background: rgba(97, 110, 183, 0.1);
+                        }
+                    }
+
+                    &.grass {
+                        .btn-showmore {
+                            color: var(--type-grass);
+                            background: rgba(92, 164, 138, 0.1);
+                        }
+                    }
+
+                    &.ground {
+                        .btn-showmore {
+                            color: var(--type-ground);
+                            background: rgba(206, 128, 86, 0.1);
+                        }
+                    }
+
+                    &.ice {
+                        .btn-showmore {
+                            color: var(--type-ice);
+                            background: rgba(139, 206, 193, 0.1);
+                        }
+                    }
+
+                    &.normal {
+                        .btn-showmore {
+                            color: var(--type-normal);
+                            background: rgba(160, 162, 159, 0.1);
+                        }
+                    }
+
+                    &.poison {
+                        .btn-showmore {
+                            color: var(--type-poison);
+                            background: rgba(172, 106, 202, 0.1);
+                        }
+                    }
+
+                    &.psychic {
+                        .btn-showmore {
+                            color: var(--type-psychic);
+                            background: rgba(235, 139, 133, 0.1);
+                        }
+                    }
+
+                    &.rock {
+                        .btn-showmore {
+                            color: var(--type-rock);
+                            background: rgba(139, 206, 193, 0.1);
+                        }
+                    }
+
+                    &.steel {
+                        .btn-showmore {
+                            color: var(--type-steel);
+                            background: rgba(101, 148, 161, 0.1);
+                        }
+                    }
+
+                    &.water {
+                        .btn-showmore {
+                            color: var(--type-water);
+                            background: rgba(136, 163, 212, 0.1);
+                        }
+                    }
+                    .btn-showmore {
+                    font-family: 'Montserrat', sans-serif;
+                    font-weight: 600;
+                    font-size: 1.3rem;
+                    line-height: 1.6rem;
+                    text-align: center;
+                    letter-spacing: -0.01em;
+                    padding: 0.4rem 1.1rem;
+                    border-radius: 0.2rem;
+                    text-transform: capitalize;
+                    margin-top: .5rem;
+                }
+                .abilities-list {
+                    pointer-events: none;
+                    position: absolute;
+                    opacity: 0;
+                    transform: translateY(-10px);
+                    transition: all .3s ease;
+                    &.active {
+                        pointer-events: all;
+                        transform: translateY(0);
+                        opacity: 1;
+                    }
+                    li {
+                        font-family: 'Montserrat', sans-serif;
+                        font-weight: 600;
+                        font-size: 1.3rem;
+                        line-height: 1.6rem;
+                        text-align: center;
+                        letter-spacing: -0.01em;
+                        padding: 0.4rem 1.1rem;
+                        border-radius: 0.2rem;
+                        text-transform: capitalize;
+                        margin-top: .5rem;
+                        background: var(--white);
+                        box-shadow: 0 0 30px 0 rgb(0 0 0 / 5%);
+                        padding: 1rem;
+                    }
+                }
                 }
                 span {
                     font-family: 'Montserrat', sans-serif;
@@ -583,7 +751,7 @@ export const ModalBox = styled.div`
     @media (max-width: 480px) {
         flex-direction: column;
         max-width: 100%;
-        height: auto;
+        height: 68rem;
         .left-modal {
             max-width: 100%;
             height: 12.5rem;
