@@ -1,7 +1,10 @@
+import { useEffect, useState } from "react";
+
 import Image from "next/image";
 import { ModalBox, ModalContent } from "./style";
 
-import { useState } from "react";
+import { api } from "services/api";
+import { getsavedPokemons, saveLink } from "services/favoritePokemons";
 
 import closeBtn from "@/assets/close.svg";
 import bug from "../../assets/icon-types/bug.svg";
@@ -22,6 +25,7 @@ import psychic from "@/assets/icon-types/psychic.svg";
 import rock from "@/assets/icon-types/rock.svg";
 import steel from "@/assets/icon-types/steel.svg";
 import water from "@/assets/icon-types/water.svg";
+import iconFav from '@/assets/icon-favorite.svg'
 
 export const Modal: React.FC<{
   type: any;
@@ -50,6 +54,24 @@ export const Modal: React.FC<{
 }) => {
 
   const [showMoreAbilities, setShowMoreAbilities] = useState<boolean>(false)
+  const [addFavorite, setAddFavorite] = useState<boolean>(false)
+
+  const  handleAddPokemonLocalStore = async (name:string) => {
+    const response = await api.get(`pokemon/${name}`)
+    saveLink('@mypoke', response.data)
+  }
+  const handleFavorite = () => {
+    let favoritesPokemons = getsavedPokemons('@mypoke')
+    const hasPokemon = favoritesPokemons.some( (item:any) => item.id === id )
+
+    if(hasPokemon) {
+        setAddFavorite(true)
+    }
+  }
+
+  useEffect(() => {
+    handleFavorite()
+}, [])
 
   return (
     <ModalContent className={modal ? 'active' : ''}>
@@ -125,6 +147,9 @@ export const Modal: React.FC<{
               <span className="id-modal">
                 #{id < 10 ? `00${id}` : id < 100 ? `0${id}` : `${id}`}
               </span>
+              <button className={addFavorite ? 'favorite active' : "favorite"} onClick={() => {handleAddPokemonLocalStore(name), setAddFavorite(true)}}>
+                <Image src={iconFav} alt="Add pokemon to your favorite list" title="Add pokemon to your favorite list" quality={90} />
+              </button>
             </div>
 
             <ul className="all-types">
@@ -158,7 +183,7 @@ export const Modal: React.FC<{
                     if(moreAbilities.ability.name !== abilities[0].ability.name )
                     return moreAbilities
                   }).map((moreAbilities:any, index:number) =>
-                    <li key={index}>
+                    <li key={index*index}>
                       {moreAbilities.ability.name}
                     </li>
                   )}
@@ -171,7 +196,7 @@ export const Modal: React.FC<{
               <span>Weaknesses</span>
               <ul className="list-weaknesses">
                 {weakness.damage_relations.double_damage_from.map(({name}:any, index:number) =>
-                    <li key={name + index} className={`tag ${name}`}>
+                    <li key={name + index } className={`tag ${name}`}>
                         {name}
                     </li>
                 )}

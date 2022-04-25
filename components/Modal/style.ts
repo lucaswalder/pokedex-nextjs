@@ -256,6 +256,17 @@ export const ModalBox = styled.div`
                 letter-spacing: -0.01em;
                 color: #7A7D80;
             }
+
+            .favorite {
+                margin-left: auto;
+                opacity: .5;
+                filter: grayscale(100%);
+                transition: all .3s ease;
+                &.active {
+                    opacity: 1;
+                    filter: grayscale(0);
+                }
+            }
         }
         .all-types {
             display: flex;
@@ -768,7 +779,7 @@ export const ModalBox = styled.div`
 
             .image {
                 margin-top: 1.5rem;
-                width: 13rem;
+                width: 14rem;
                 height: 12rem;
             }
         }

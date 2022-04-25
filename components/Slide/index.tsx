@@ -12,6 +12,7 @@ import logo from '@/assets/logo.svg'
 
 import Image from "next/image";
 import { AreaSlide, SlideContent } from "./style";
+import Link from "next/link";
 
 
 export const Slide: React.FC = () => {
@@ -52,7 +53,9 @@ export const Slide: React.FC = () => {
                                         <div className="logo">
                                             <Image src={logo} alt="Logo Pokemon" title='Logo Pokemon'/>
                                             </div>
-                                        <span>Case Study  	&minus;&gt;  <strong>CodeBoost</strong></span>
+                                        <Link href={'/favorites'}>
+                                            <span>My Favorites <strong>Pokemons</strong></span>
+                                        </Link>
                                     </div>
                                     <div className={`tag ${color}`}>
                                         <div className="icon">

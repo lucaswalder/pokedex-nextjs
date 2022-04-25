@@ -34,10 +34,6 @@ export const Card: React.FC <{type: string, allTypes:object[], id:number, image:
         setWeakness(response.data)
     }
 
-    useEffect(() => {
-        handleModalStatus
-    }, [weakness])
-
     return(
         <>
         <CardContent className={type} onClick={() => {handleModalStatus(`type/${type}`)}}>
