@@ -15,7 +15,7 @@ export const Hero = styled.section`
     span {
         color: var(--white);
         font-weight: 400;
-        font-size: 1.3rem;
+        font-size: 1.6rem;
         line-height: 1.6rem;
         cursor: pointer;
         transition: opacity .3s ease;
