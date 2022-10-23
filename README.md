@@ -1,4 +1,7 @@
 
+![Logo](https://raw.githubusercontent.com/lucaswalder/pokedex-nextjs/main/public/cover.png)
+
+
 # Projeto Pokemon API - React + NextJs
 
 Esse projeto foi desenvolvido durante o meu PDI - [PROJETO DE DESENVOLVIMENTO INDIVIDUAL]
