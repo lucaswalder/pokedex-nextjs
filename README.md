@@ -1,34 +1,116 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-## Getting Started
+# Projeto Pokemon API - React + NextJs
 
-First, run the development server:
+Esse projeto foi desenvolvido durante o meu PDI - [PROJETO DE DESENVOLVIMENTO INDIVIDUAL]
+O desafio era conseguir consumir uma API utilizando React, e mostrar esses conteúdos em tela.
 
-```bash
-npm run dev
-# or
-yarn dev
+
+
+
+## Funcionalidades
+
+
+- Separa os pokemons por tipos;
+- Pesquisar pokemons específicos;
+- Modal de cada pokemon, mostrando suas habilidades e status;
+- Salvar os pokemons favoritos.
+
+
+## Exemplo de uso da API
+
+#### Retorna todos os pokemons
+
+```http
+  GET https://pokeapi.co/api/v2/pokemon
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+#### Retorna um item
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+```http
+  GET /api/items/pokemon/${ID}
+  
+  GET /api/items/pokemon/${name}
+```
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+| Parâmetro   | Tipo       | Descrição                                   |
+| :---------- | :--------- | :------------------------------------------ |
+| `id` or `name`      | `string` | **Obrigatório**. O ID ou Nome do pokemon que você quer |
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
 
-## Learn More
+Para mais informações acesse a [Documentação da API](https://pokeapi.co/docs/v2)
 
-To learn more about Next.js, take a look at the following resources:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Demonstração
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+Clique no link abaixo para ver o projeto on line
 
-## Deploy on Vercel
+[Pokemon API - NextJs](https://pokedex-nextjs-sigma.vercel.app/)
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## Rodando localmente
+
+Clone o projeto
+
+```bash
+  git clone https://github.com/lucaswalder/pokedex-nextjs
+```
+
+Entre no diretório do projeto
+
+```bash
+  cd pokedex-nextjs
+```
+
+Instale as dependências
+
+```bash
+  npm install or yarn
+```
+
+Inicie o servidor
+
+```bash
+  npm  run dev
+  or
+  yarn dev
+```
+
+
+## Stack utilizada
+
+- [React](https://reactjs.org/)
+- [NextJs](https://nextjs.org/)
+- [Typescript](https://www.typescriptlang.org/)
+- [Styled Components](https://styled-components.com/)
+
+
+
+## Aprendizados
+
+Sendo o meu segundo projeto em React, tive algumas dificuldades.
+Até mesmo por ter sido criado com NextJs, Typescript e utilizando Styled Components
+Como não tinha domínio nas ferramentas, tudo era um aprendizado, mas buscando na internet e na comunidade
+pude ir superando os desafios, conseguindo implementar algumas coisas novas no projeto.
+
+Como utlilizar o server side rendering do Next.
+O poder o styled Components e Typescript.
+
+## Licença
+
+[MIT](https://choosealicense.com/licenses/mit/)
+
+
+## 🚀 Sobre mim
+Atualmente estou estudando desenvolvimento front-end e tenho certeza que serei um grande desenvolvedor no futuro.
+🔭 Atualmente trabalho como Desenvolvedor Front-End na Insany Design.
+
+🌱 Atualmente estou aprendendo NextJS, GraphQl e TypesScript.
+
+👨‍💻 Todos os meus projetos estão disponíveis em lucaswalder.dev
+
+📫 Como me contatar: contato@lucaswalder.dev
+
+⚡ Curiosidade: trabalhei muitos anos como designer gráfico, mas sempre fui apaixonado por programação e agora resolvi seguir meu coração (sei que parece algo saído de um filme romântico.)
+
+Para entrar em contato me siga no Instagram [@lucaswalder.dev](https://www.instagram.com/lucaswalder.dev/)
+
